@@ -16,7 +16,7 @@ const Logo = styled.div`
     }
     p{
 
-      //font-family: 'Righteous';
+      font-family: 'Righteous';
       font-style: normal;
       font-weight: 400;
       font-size: 36px;

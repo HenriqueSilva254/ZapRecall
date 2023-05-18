@@ -1,20 +1,32 @@
 
-import { styled } from 'styled-components'
-import Header from './Header'
-import Decks from './Decks'
 
+  import Header from './Header'
+  import Decks from './Decks'
+  import Footer from './Footer'
+  import { useState } from 'react'
+  import Logotipo from './assets/logo.png'
+  import TelaInicial from './TelaInicial'
 
-
-
-
-function App() {
-
-  return (
-    <> 
-    <Header />
-    <Decks />
+                                                                                                                               
+  function App() {
+ 
+   
+    return (
+    <>
+      <TelaInicial />
     </>
-  )
-}
+    )
 
-export default App
+  
+  }
+
+  export default App
+
+/*
+ <> 
+    <Header />
+    <Decks contador={setAcertos}/>
+    <Footer contador={acertos}/>
+    </>
+    
+    */
