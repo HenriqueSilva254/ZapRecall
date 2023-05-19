@@ -27,7 +27,7 @@ function Decks(props) {
     const [AdicinarIcones, setAdicinarIcones] = useState([]) 
     props.ObjetoZap(AdicinarIcones)
 
-    const [NovoContador, setNovoContador] = useState(0) 
+    let [NovoContador, setNovoContador] = useState(0) 
     props.contador(NovoContador)
 
     const [selecionados, setSelecionados] = useState([])
@@ -39,15 +39,17 @@ function Decks(props) {
             { question: "Podemos colocar __ dentro do JSX", answer: "expressões" },
         ]
     )
-    const [pergunta, setPergunta] = useState(cards.map((Card, index) => <Cartoes key={index} ><div><p>Pergunta {index+1}</p><img src={seta} onClick={() =>  ModificarCard(Card, index)}/></div></Cartoes>))
+    const [pergunta, setPergunta] = useState(cards.map((Card, index) => <Cartoes data-test="flashcard" key={index} ><div><p data-test="flashcard-text">Pergunta {index+1}</p><img data-test="play-btn" src={seta} onClick={() =>  ModificarCard(Card, index)}/></div></Cartoes>))
     const [NovoCard, setNovoCard] = useState([...pergunta])
     const [Zaps, setZaps] = useState(
       [
-        {texto: "Não lembrei", color: "#FF3030", icone: errou},
-        {texto: "Quase não lembrei", color:"#FF922E", icone: quase}, 
-        {texto: "Zap!", color: "#2FBE34", icone: correto}
+        {data:"no-btn", texto: "Não lembrei", color: "#FF3030", icone: errou},
+        {data:"partial-btn", texto: "Quase não lembrei", color:"#FF922E", icone: quase}, 
+        {data:"zap-btn", texto: "Zap!", color: "#2FBE34", icone: correto}
       ]
     )
+    let contador = 0
+
     return (
         <Container>
              {pergunta}
@@ -58,10 +60,10 @@ function Decks(props) {
     function ModificarCard(props,i){
         
         NovoCard[i] = (
-        <Cartoes width="true" key={i} >
+        <Cartoes data-test="flashcard" width="true" key={i} >
             <div>
-                <p>{props.question}</p> 
-                <img src={setaVirar} onClick={() =>  MostrarRespostas(props, i)}/>               
+                <p data-test="flashcard-text">{props.question}</p> 
+                <img data-test="turn-btn" src={setaVirar} onClick={() =>  MostrarRespostas(props, i)}/>               
             </div>
             
         </Cartoes>) 
@@ -72,12 +74,12 @@ function Decks(props) {
     }
     function MostrarRespostas(props, i){
       NovoCard[i] = (
-        <CartoesResposta  key={i} >
+        <CartoesResposta data-test="flashcard" key={i} >
             <div>
-                <p>{props.answer}</p>                
+                <p data-test="flashcard-text">{props.answer}</p>                
             </div>
             <div>
-              {Zaps.map((Menssagens,index) => <Zap key={index} cores={Menssagens.color} onClick={()=> ZapConcluido( Menssagens, i)}>{Menssagens.texto}</Zap>)}
+              {Zaps.map((Menssagens,index) => <Zap key={index} cores={Menssagens.color} data-test={Menssagens.data} onClick={()=> ZapConcluido( Menssagens, i)}>{Menssagens.texto}</Zap>)}
             </div>
             
             
@@ -89,17 +91,19 @@ function Decks(props) {
 
 
     function ZapConcluido( props, i){
-      const SomarContador = i+1
-      setNovoContador(SomarContador)
+      NovoContador = NovoContador + 1
+      const AddContador = NovoContador
+      setNovoContador(AddContador)
+      console.log(AddContador)
 
-      const AdicionarNovosIcones = props.icone
-      AdicinarIcones.push(AdicionarNovosIcones)
+      //const AdicionarNovosIcones = { icons: props.icone}
+      AdicinarIcones.push( {icons: props.icone, data: props.data})
 
       NovoCard[i] = (
-        <Cartoes cores={props.color} decoration="true">
+        <Cartoes data-test="flashcard" cores={props.color} decoration="true">
             <div>
-                <p>pergunta {i+1}</p>   
-                <img src={props.icone}/>             
+                <p data-test="flashcard-text">pergunta {i+1}</p>   
+                <img data-test={props.data} src={props.icone}/>             
             </div>
         </Cartoes>) 
         
