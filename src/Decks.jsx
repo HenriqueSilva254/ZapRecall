@@ -39,7 +39,7 @@ function Decks(props) {
             { question: "Podemos colocar __ dentro do JSX", answer: "expressões" },
         ]
     )
-    const [pergunta, setPergunta] = useState(cards.map((Card, index) => <Cartoes data-test="flashcard" key={index} ><div><p data-test="flashcard-text">Pergunta {index+1}</p><img data-test="play-btn" src={seta} onClick={() =>  ModificarCard(Card, index)}/></div></Cartoes>))
+    const [pergunta, setPergunta] = useState(cards.map((Card, index) => <Cartoes  key={index} ><div><p data-test="flashcard-text">Pergunta {index+1}</p><img data-test="play-btn" src={seta} onClick={() =>  ModificarCard(Card, index)}/></div></Cartoes>))
     const [NovoCard, setNovoCard] = useState([...pergunta])
     const [Zaps, setZaps] = useState(
       [
@@ -51,7 +51,7 @@ function Decks(props) {
     let contador = 0
 
     return (
-        <Container>
+        <Container data-test="flashcard">
              {pergunta}
         </Container>
     )
@@ -60,7 +60,7 @@ function Decks(props) {
     function ModificarCard(props,i){
         
         NovoCard[i] = (
-        <Cartoes data-test="flashcard" width="true" key={i} >
+        <Cartoes  width="true" key={i} >
             <div>
                 <p data-test="flashcard-text">{props.question}</p> 
                 <img data-test="turn-btn" src={setaVirar} onClick={() =>  MostrarRespostas(props, i)}/>               
@@ -74,7 +74,7 @@ function Decks(props) {
     }
     function MostrarRespostas(props, i){
       NovoCard[i] = (
-        <CartoesResposta data-test="flashcard" key={i} >
+        <CartoesResposta  key={i} >
             <div>
                 <p data-test="flashcard-text">{props.answer}</p>                
             </div>
@@ -100,7 +100,7 @@ function Decks(props) {
       AdicinarIcones.push( {icons: props.icone, data: props.data})
 
       NovoCard[i] = (
-        <Cartoes data-test="flashcard" cores={props.color} decoration="true">
+        <Cartoes  cores={props.color} decoration="true">
             <div>
                 <p data-test="flashcard-text">pergunta {i+1}</p>   
                 <img data-test={props.data} src={props.icone}/>             
