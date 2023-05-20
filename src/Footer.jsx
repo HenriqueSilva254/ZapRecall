@@ -8,9 +8,14 @@ function Footer(props) {
     const InconesNovos = props.ObjetoZap.map(img => <img data-test={img.data} key={img} src={img.icons} />)
     let [Menssagemfinal, setMenssagemfinal] = useState()
     console.log(props.ObjetoZap)
-
+    let [teste, setTeste] = useState(0)
     for (let i = 0; i < props.ObjetoZap.length; i++) {
-        if (props.ObjetoZap[i].icons === '/src/assets/icone_erro.png' && props.contador === 4) {
+
+        if(props.ObjetoZap[i].data === 'no-btn'){
+             teste = 1
+        }
+
+        if (teste === 1 && props.contador === 4) {
             
             Menssagemfinal =
                 <Menssagem contagem={props.contador}>
