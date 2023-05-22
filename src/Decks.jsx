@@ -51,7 +51,7 @@ function Decks(props) {
     let contador = 0
 
     return (
-        <Container data-test="flashcard">
+        <Container >
              {pergunta}
         </Container>
     )
@@ -60,7 +60,7 @@ function Decks(props) {
     function ModificarCard(props,i){
         
         NovoCard[i] = (
-        <Cartoes  width="true" key={i} >
+        <Cartoes data-test="flashcard" width="true" key={i} >
             <div>
                 <p data-test="flashcard-text">{props.question}</p> 
                 <img data-test="turn-btn" src={setaVirar} onClick={() =>  MostrarRespostas(props, i)}/>               
@@ -74,7 +74,7 @@ function Decks(props) {
     }
     function MostrarRespostas(props, i){
       NovoCard[i] = (
-        <CartoesResposta  key={i} >
+        <CartoesResposta data-test="flashcard" key={i} >
             <div>
                 <p data-test="flashcard-text">{props.answer}</p>                
             </div>
@@ -100,7 +100,7 @@ function Decks(props) {
       AdicinarIcones.push( {icons: props.icone, data: props.data})
 
       NovoCard[i] = (
-        <Cartoes  cores={props.color} decoration="true">
+        <Cartoes data-test="flashcard" cores={props.color} decoration="true">
             <div>
                 <p data-test="flashcard-text">pergunta {i+1}</p>   
                 <img data-test={props.data} src={props.icone}/>             
