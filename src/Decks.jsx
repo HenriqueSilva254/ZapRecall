@@ -39,7 +39,7 @@ function Decks(props) {
             { question: "Podemos colocar __ dentro do JSX", answer: "expressões" },
         ]
     )
-    const [pergunta, setPergunta] = useState(cards.map((Card, index) => <Cartoes  key={index} ><div><p data-test="flashcard-text">Pergunta {index+1}</p><img data-test="play-btn" src={seta} onClick={() =>  ModificarCard(Card, index)}/></div></Cartoes>))
+    const [pergunta, setPergunta] = useState(cards.map((Card, index) => <Cartoes data-test="flashcard" key={index}  ><div><p data-test="flashcard-text">Pergunta {index+1}</p><img data-test="play-btn" src={seta} onClick={() =>  ModificarCard(Card, index)}/></div></Cartoes>))
     const [NovoCard, setNovoCard] = useState([...pergunta])
     const [Zaps, setZaps] = useState(
       [
